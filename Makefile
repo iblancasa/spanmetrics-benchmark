@@ -1,9 +1,11 @@
 .PHONY: start-cluster
 start-cluster:
-	kind create cluster --name spanmetrics-test
+	kind create cluster --name spanmetrics-test --config kind-config.yaml
 	helm repo add coralogix https://cgx.jfrog.io/artifactory/coralogix-charts-virtual
 	helm repo update
+	./install-metrics-server.sh
 	echo "<WARNING> Create the coralogix-keys in the cluster before anything else"
+	./adjust-resources.sh
 
 .PHONY: clean
 clean:
@@ -39,7 +41,7 @@ install-collector-with-preset-spanmetrics:
 		--render-subchart-notes \
 		--set global.domain="eu2.coralogix.com" \
 		--set global.clusterName="spanmetrics-test" \
-		--file values.yaml
+		-f values.yaml
 
 .PHONY: install-telemetrygen
 install-telemetrygen:

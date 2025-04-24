@@ -34,18 +34,17 @@ The benchmarks compare the following configurations:
 
 ## ▶️ How to Run the Benchmark
 
-1. Create the cluster `make start-cluster`.
-2. Create the private keys provided by Coralogix.
+1. Export the environment variable `MY_CX_KEY` with the API Key from Coralogix.
 3. Run `./benchmark.sh`
 
 
 ```sh
-# Default (100 services, 30m test)
+# Default (100 services)
 ./benchmark.sh
 
-# Custom (1000 services, 10 minutes)
-./benchmark.sh 1000 10m
+# Custom (1000 services)
+./benchmark.sh 1000
 
-# Quick test (10 services, 30 seconds)
-./benchmark.sh 10 30s
+# Quick test (10 services)
+./benchmark.sh 10
 ```
